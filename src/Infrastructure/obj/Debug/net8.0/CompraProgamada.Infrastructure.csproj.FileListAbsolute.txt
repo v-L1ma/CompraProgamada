@@ -1,0 +1,17 @@
+/mnt/c/Users/Vinicius/Documents/GitHub/TemplatesCLI/CompraProgamada/src/Infrastructure/bin/Debug/net8.0/CompraProgamada.Infrastructure.deps.json
+/mnt/c/Users/Vinicius/Documents/GitHub/TemplatesCLI/CompraProgamada/src/Infrastructure/bin/Debug/net8.0/CompraProgamada.Infrastructure.dll
+/mnt/c/Users/Vinicius/Documents/GitHub/TemplatesCLI/CompraProgamada/src/Infrastructure/bin/Debug/net8.0/CompraProgamada.Infrastructure.pdb
+/mnt/c/Users/Vinicius/Documents/GitHub/TemplatesCLI/CompraProgamada/src/Infrastructure/bin/Debug/net8.0/CompraProgamada.Application.dll
+/mnt/c/Users/Vinicius/Documents/GitHub/TemplatesCLI/CompraProgamada/src/Infrastructure/bin/Debug/net8.0/CompraProgamada.Domain.dll
+/mnt/c/Users/Vinicius/Documents/GitHub/TemplatesCLI/CompraProgamada/src/Infrastructure/bin/Debug/net8.0/CompraProgamada.Application.pdb
+/mnt/c/Users/Vinicius/Documents/GitHub/TemplatesCLI/CompraProgamada/src/Infrastructure/bin/Debug/net8.0/CompraProgamada.Domain.pdb
+/mnt/c/Users/Vinicius/Documents/GitHub/TemplatesCLI/CompraProgamada/src/Infrastructure/obj/Debug/net8.0/CompraProgamada.Infrastructure.csproj.AssemblyReference.cache
+/mnt/c/Users/Vinicius/Documents/GitHub/TemplatesCLI/CompraProgamada/src/Infrastructure/obj/Debug/net8.0/CompraProgamada.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+/mnt/c/Users/Vinicius/Documents/GitHub/TemplatesCLI/CompraProgamada/src/Infrastructure/obj/Debug/net8.0/CompraProgamada.Infrastructure.AssemblyInfoInputs.cache
+/mnt/c/Users/Vinicius/Documents/GitHub/TemplatesCLI/CompraProgamada/src/Infrastructure/obj/Debug/net8.0/CompraProgamada.Infrastructure.AssemblyInfo.cs
+/mnt/c/Users/Vinicius/Documents/GitHub/TemplatesCLI/CompraProgamada/src/Infrastructure/obj/Debug/net8.0/CompraProgamada.Infrastructure.csproj.CoreCompileInputs.cache
+/mnt/c/Users/Vinicius/Documents/GitHub/TemplatesCLI/CompraProgamada/src/Infrastructure/obj/Debug/net8.0/CompraProgamada.Infrastructure.csproj.CopyComplete
+/mnt/c/Users/Vinicius/Documents/GitHub/TemplatesCLI/CompraProgamada/src/Infrastructure/obj/Debug/net8.0/CompraProgamada.Infrastructure.dll
+/mnt/c/Users/Vinicius/Documents/GitHub/TemplatesCLI/CompraProgamada/src/Infrastructure/obj/Debug/net8.0/refint/CompraProgamada.Infrastructure.dll
+/mnt/c/Users/Vinicius/Documents/GitHub/TemplatesCLI/CompraProgamada/src/Infrastructure/obj/Debug/net8.0/CompraProgamada.Infrastructure.pdb
+/mnt/c/Users/Vinicius/Documents/GitHub/TemplatesCLI/CompraProgamada/src/Infrastructure/obj/Debug/net8.0/ref/CompraProgamada.Infrastructure.dll
