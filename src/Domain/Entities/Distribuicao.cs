@@ -1,14 +1,12 @@
-using System.Numerics;
-
 namespace CompraProgamada.Domain.Entities;
 
 public class Distribuicao
 {
-    public BigInteger Id { get; set; }
-    public BigInteger OrdemCompraId { get; set; }
-    public string Descricao { get; set; } = string.Empty;
-    public decimal Preco { get; set; }
+    public long Id { get; set; }
+    public long OrdemCompraId { get; set; }
+    public long CustodiaFilhoteId { get; set; }
+    public string Ticker { get; set; } = string.Empty;
     public int Quantidade { get; set; }
-    public DateTime DataCriacao { get; set; }
-    public DateTime DataAtualizacao { get; set; }
+    public decimal PrecoUnitario { get; set; }
+    public DateTime DataDistribuicao { get; set; }
 }

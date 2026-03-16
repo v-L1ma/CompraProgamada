@@ -1,10 +1,8 @@
-using System.Numerics;
-
 namespace CompraProgamada.Domain.Entities;
 
 public class Cotacao
 {
-    public BigInteger Id { get; set; }
+    public long Id { get; set; }
     public DateTime DataPregao { get; set; }
     public string Ticker { get; set; } = string.Empty;
     public decimal PrecoAbertura { get; set; }

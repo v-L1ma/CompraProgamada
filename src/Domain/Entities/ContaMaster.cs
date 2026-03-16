@@ -1,10 +1,8 @@
-using System.Numerics;
-
 namespace CompraProgamada.Domain.Entities;
 
 public class ContaMaster
 {
-    public BigInteger Id { get; set; }
+    public long Id { get; set; }
     public string Nome { get; set; } = string.Empty;
     public string Descricao { get; set; } = string.Empty;
     public decimal Preco { get; set; }

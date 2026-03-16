@@ -1,10 +1,8 @@
-using System.Numerics;
-
 namespace CompraProgamada.Domain.Entities;
 
 public class Cliente
 {
-    public BigInteger Id { get; set; }
+    public long Id { get; set; }
     public string Nome { get; set; } = string.Empty;
     public string CPF { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
