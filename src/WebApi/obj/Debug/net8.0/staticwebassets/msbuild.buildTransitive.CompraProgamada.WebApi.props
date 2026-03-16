@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="../buildMultiTargeting/CompraProgamada.WebApi.props" />
-</Project>
