@@ -1,4 +1,4 @@
-namespace CompraProgamada.Domain.Entities;
+namespace CompraProgamada.Domain.Entities.ClienteEntity;
 
 public class Cliente
 {

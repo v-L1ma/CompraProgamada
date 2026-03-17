@@ -18,43 +18,53 @@ namespace CompraProgamada.WebApi.Middlewares
         {
             _logger.LogError(exception, "Exception occurred: {Message}", exception.Message);
 
-            var problemDetails = new ProblemDetails
-            {
-                Type = exception.GetType().Name,
-                Title = "An error occurred while processing your request",
-                Detail = exception.Message,
-                Instance = httpContext.Request.Path
-            };
+            int statusCode;
+            object response;
 
             switch (exception)
             {
+                case DomainException domainException:
+                    statusCode = domainException.StatusCode;
+                    response = new 
+                    { 
+                        erro = domainException.Message, 
+                        codigo = domainException.Codigo 
+                    };
+                    break;
+                case NotFoundException notFoundException:
+                    statusCode = StatusCodes.Status404NotFound;
+                    response = new 
+                    { 
+                        erro = notFoundException.Message, 
+                        codigo = "NOT_FOUND" 
+                    };
+                    break;
                 case ValidationException validationException:
-                    problemDetails.Status = StatusCodes.Status400BadRequest;
-                    problemDetails.Title = "Validation Error";
-                    problemDetails.Extensions["errors"] = validationException.Errors
-                        .GroupBy(x => x.PropertyName)
-                        .ToDictionary(
-                            g => g.Key,
-                            g => g.Select(x => x.ErrorMessage).ToArray()
-                        );
-                    break;
-                case NotFoundException:
-                    problemDetails.Status = StatusCodes.Status404NotFound;
-                    problemDetails.Title = "Not Found";
-                    break;
-                case DomainException:
-                    problemDetails.Status = StatusCodes.Status400BadRequest;
-                    problemDetails.Title = "Bad Request";
+                    statusCode = StatusCodes.Status400BadRequest;
+                    response = new 
+                    { 
+                        erro = "Erro de validação", 
+                        codigo = "VALIDATION_ERROR",
+                        detalhes = validationException.Errors
+                            .GroupBy(x => x.PropertyName)
+                            .ToDictionary(
+                                g => g.Key,
+                                g => g.Select(x => x.ErrorMessage).ToArray()
+                            )
+                    };
                     break;
                 default:
-                    problemDetails.Status = StatusCodes.Status500InternalServerError;
+                    statusCode = StatusCodes.Status500InternalServerError;
+                    response = new 
+                    { 
+                        erro = "Ocorreu um erro interno no servidor.", 
+                        codigo = "INTERNAL_SERVER_ERROR" 
+                    };
                     break;
             }
 
-            httpContext.Response.StatusCode = problemDetails.Status.Value;
-
-            await httpContext.Response.WriteAsJsonAsync(problemDetails, cancellationToken);
-
+            httpContext.Response.StatusCode = statusCode;
+            await httpContext.Response.WriteAsJsonAsync(response, cancellationToken);
             return true;
         }
     }

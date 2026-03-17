@@ -1,4 +1,4 @@
-using CompraProgamada.Application.Features.Cliente.Commands;
+using CompraProgamada.Application.Features.ClienteFeature.Commands;
 using CompraProgamada.Application.Features.SampleFeature;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -20,7 +20,7 @@ public class ClienteController : ControllerBase
     [HttpPost("Produto")]
     public async Task<CreateAdesaoCommandResponse> AderirProduto([FromBody] CreateAdesaoCommand command)
     {
-        CreateAdesaoCommandResponse response = await  _mediator.Send(command);
+        CreateAdesaoCommandResponse response = await _mediator.Send(command);
         return response;
     }
 
