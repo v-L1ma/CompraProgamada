@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using CompraProgamada.Application.Repositories;
 using CompraProgamada.Infrastructure;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace CompraProgamada.Infrastructure.Repositories
 {
@@ -38,9 +39,10 @@ namespace CompraProgamada.Infrastructure.Repositories
             return false;
         }
 
-        public async Task AddAsync(T entity)
+        public async Task<T> AddAsync(T entity)
         {
-            await _dbSet.AddAsync(entity);
+            var entityEntry = await _dbSet.AddAsync(entity);
+            return entityEntry.Entity;
         }
 
         public Task UpdateAsync(T entity)

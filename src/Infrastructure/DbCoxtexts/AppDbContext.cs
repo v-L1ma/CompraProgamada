@@ -1,4 +1,5 @@
 using CompraProgamada.Domain.Entities;
+using CompraProgamada.Domain.Entities.ClienteEntity;
 using Microsoft.EntityFrameworkCore;
 
 namespace CompraProgamada.Infrastructure

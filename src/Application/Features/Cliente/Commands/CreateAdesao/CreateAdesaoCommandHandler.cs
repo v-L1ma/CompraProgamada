@@ -1,8 +1,8 @@
 using System.Net;
 using CompraProgamada.Application.Abstractions.Messaging;
 using CompraProgamada.Application.Features.SampleFeature;
-using CompraProgamada.Application.Utils;
 using CompraProgamada.Application.Repositories;
+using CompraProgamada.Domain.Entities;
 using CompraProgamada.Domain.Entities.ClienteEntity;
 using CompraProgamada.Domain.Exceptions;
 
@@ -19,7 +19,7 @@ namespace CompraProgamada.Application.Features.ClienteFeature.Commands
 
         public async Task<CreateAdesaoCommandResponse> Handle(CreateAdesaoCommand request, CancellationToken cancellationToken)
         {
-            if (!ValidarCampos(request))
+            if (ValidarCampos(request))
             {
                 throw new DomainException("CAMPOS_INVALIDOS", "Informe todos os campos.", (int)HttpStatusCode.BadRequest);
             }
@@ -29,9 +29,9 @@ namespace CompraProgamada.Application.Features.ClienteFeature.Commands
                 throw new DomainException("VALOR_MENSAL_INVALIDO", "O valor mensal minimo e de R$ 100,00.", (int)HttpStatusCode.BadRequest);
             }
 
-            var repository = _unitOfWork.GetRepository<Cliente>();
+            var clienteRepository = _unitOfWork.GetRepository<Cliente>();
 
-            if (repository.GetAllAsync().Result.FirstOrDefault(c => c.CPF == request.CPF) != null)
+            if (clienteRepository.GetAllAsync().Result.FirstOrDefault(c => c.CPF == request.CPF) != null)
             {
                 throw new DomainException("CLIENTE_CPF_DUPLICADO", "CPF ja cadastrado no sistema.", (int)HttpStatusCode.BadRequest);
             }
@@ -46,10 +46,43 @@ namespace CompraProgamada.Application.Features.ClienteFeature.Commands
                 DataAdesao = DateTime.UtcNow
             };
             
-            await repository.AddAsync(cliente);
+            var clienteCadastrado = await clienteRepository.AddAsync(cliente);
             await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-            return new CreateAdesaoCommandResponse("Adesão concluída com sucesso");
+            var contaGraficaRepository = _unitOfWork.GetRepository<ContaGrafica>();
+
+            int qtdClientes = clienteRepository.GetAllAsync().Result.ToList().Count;
+
+            string NumeroConta = $"FLH-{qtdClientes.ToString().PadLeft(6,'0')}";
+
+            var contaGraficaFilhote = new ContaGrafica
+            {
+                ClienteId = clienteCadastrado.Id,
+                NumeroConta = NumeroConta,
+                Tipo = Domain.Enums.TipoConta.Filhote,
+                DataCriacao = DateTime.UtcNow
+            };
+
+            var contaGraficaCriada = await contaGraficaRepository.AddAsync(contaGraficaFilhote);
+
+            CreateAdesaoCommandResponse response = new CreateAdesaoCommandResponse
+            (
+                clienteCadastrado.Id,
+                clienteCadastrado.Nome,
+                clienteCadastrado.CPF,
+                clienteCadastrado.Email,
+                clienteCadastrado.ValorMensal,
+                clienteCadastrado.Ativo,
+                clienteCadastrado.DataAdesao,
+                new ContaGraficaResponse(
+                    contaGraficaCriada.Id,
+                    contaGraficaCriada.NumeroConta,
+                    contaGraficaCriada.Tipo.ToString(),
+                    contaGraficaCriada.DataCriacao
+                )
+            );
+
+            return response;
         }
         private static bool ValidarCampos(CreateAdesaoCommand request)
         {

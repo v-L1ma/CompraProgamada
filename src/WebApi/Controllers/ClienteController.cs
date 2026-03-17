@@ -18,10 +18,10 @@ public class ClienteController : ControllerBase
     }
 
     [HttpPost("Produto")]
-    public async Task<CreateAdesaoCommandResponse> AderirProduto([FromBody] CreateAdesaoCommand command)
+    public async Task<ActionResult<CreateAdesaoCommandResponse>> AderirProduto([FromBody] CreateAdesaoCommand command)
     {
         CreateAdesaoCommandResponse response = await _mediator.Send(command);
-        return response;
+        return Created($"/api/Cliente/produto/{response.ClienteId}", response);
     }
 
     [HttpDelete("Produto")]
